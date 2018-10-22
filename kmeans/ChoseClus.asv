@@ -1,0 +1,10 @@
+function [clus]=ChoseClus(asignacion)
+    dimensiones=size(asignacion);
+    clus=[];
+    for c=1;dimensiones(1)
+        vector=asignacion(c,1:dimensiones(2));
+        aux=min(vector);
+        clus=[clus;aux];
+    end
+    
+end

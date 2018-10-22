@@ -1,14 +1,14 @@
-function [resultado]=asignacion(clusters,datos)
-    dimensionesClusters=size(clusters);
-    dimensionesDatos=size(datos);
+function [resultado]=asignacion(clusters,datos)%este metodo nos regresa las distancias de cada registro a cada centroide encontrado
+    dimensionesClusters=size(clusters);%tomamos dimensiones de las matrices de datos que entran
+    dimensionesDatos=size(datos);%igual que arriba xD
     
-    datos(:,dimensionesDatos(2))=[];
-    datos = table2array(datos);
+    datos(:,dimensionesDatos(2))=[];%quitamos la ultima columna de los datos
+    datos = table2array(datos);%convertimos la tabla a matriz para poder hacer operaciones
     
-    distancia=0;
-    distanciasss=[1,dimensionesClusters(2)-1];
+    distancia=0;%inicializamos una variable auxiliar
+    distanciasss=[1,dimensionesClusters(2)-1];%arreglo que contiene las distancias de manera temporal para despues ser agregadas a una matriz mas grande
     
-    resultado=[];
+    resultado=[];%a esta matriz se le estaran agregando las distanciasss
     for y=1:dimensionesDatos(1)
         for x=1:dimensionesClusters(1)
             for c=1:dimensionesClusters(2)-1
