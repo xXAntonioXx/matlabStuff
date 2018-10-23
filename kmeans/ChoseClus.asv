@@ -5,11 +5,9 @@ function [clus]=ChoseClus(asignacion)
         vector=asignacion(c,1:dimensiones(2));%tomamos el renglon de distancia
         aux=min(vector);%encontramos el minimo
         maping=asignacion(c,:)==aux;
-        indice=find(maping==1);%
-        clus(c,1)=indice;
+        indice=find(maping==1);%junto con la variable de maping enocntramos el indice donde se encuentra el dato de distancia y con esto determinamos que centroide es
+        clus(c,1)=indice;%lo agregamos a la columna de resultado
     end
     clus(:,2)=[];
-%     vector=asignacion(c,1:dimensiones(2));
-%         vector
-%         aux=min(vector);
+
 end

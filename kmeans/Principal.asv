@@ -1,0 +1,19 @@
+k=3; %cantidad de clusters
+datos = csvread('datos2.csv');%leemos los datos
+tamano=size(datos);
+datos(:,tamano(2))=[];%aqui puedes eliminar la ultima columna
+%datos=table2array(datos);%aqui lo puedes convertir a una matriz
+
+clusters = CrearCentroides(datos,k);%k=numero de clusters, se genera el primer cluster
+analize=asignacion(clusters,datos);%%distancias a cada centroide en base a los clusters (se genera un vector de distancias para cada registro)
+
+clasificacion1=ChoseClus(analize);%escogemos a cual centroide esta mas cerca el registro
+
+datosArray = [datos clasificacion1];%tomamos 
+
+nuevoCluster=ClusterPromedio(datosArray,k);
+
+while clusters~=nuevoCluster
+    analize=asignacion(nuevoCluster,datos);
+end
+

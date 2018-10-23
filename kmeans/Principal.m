@@ -1,26 +1,30 @@
-k=4; %cantidad de clusters
-datos = readtable('datos.csv');%leemos los datos
+k=3; %cantidad de clusters
+datos = csvread('datos2.csv');%leemos los datos
 tamano=size(datos);
-%datos(:,tamano(2))=[];%aqui puedes eliminar la ultima columna
+datos(:,tamano(2))=[];%aqui puedes eliminar la ultima columna
 %datos=table2array(datos);%aqui lo puedes convertir a una matriz
 
-clusters = CrearCentroides(datos,k);%k=numero de clusters
-analize=asignacion(clusters,datos);
+clusters = CrearCentroides(datos,k);%k=numero de clusters, se genera el primer cluster
+analize=asignacion(clusters,datos);%%distancias a cada centroide en base a los clusters (se genera un vector de distancias para cada registro)
 
-clasificacion1=ChoseClus(analize);
+clasificacion1=ChoseClus(analize);%escogemos a cual centroide esta mas cerca el registro
 
-datosArray = table2array(datos(:,1:4));
+datosArray = [datos clasificacion1];%concatenamos los datos con la nueva clasificacion
 
-datosArray = [datosArray clasificacion1];
+nuevoCluster=ClusterPromedio(datosArray,k);%en base a promedios volvemos a generar clusters
+% if isequal(clusters,nuevoCluster)==0
+%     k
+% end
 
-%ahora recrea los centroides en base a los primeros resultados
-mapClus1=datosArray(:,5)==1;
-primerCluster=datosArray(mapClus1,:);
-mapClus2=datosArray(:,5)==2;
-segundoCluster=datosArray(mapClus2,:);
-mapClus3=datosArray(:,5)==3;
-tercerCluster=datosArray(mapClus3,:);
-mapClus4=datosArray(:,5)==4;
-cuartoCluster=datosArray(mapClus4,:);
-%ahora te falta generar nuevos clusters
+while isequal(clusters,nuevoCluster)==0
+    k
+%     nuevoCluster=ClusterPromedio(datosArray,k);
+%     nuevoCluster
+    datosArray(:,tamano(2))=[];
+    analize=asignacion(nuevoCluster,datosArray);
+    clasificacion1=ChoseClus(analize);
+    datosArray = [datos clasificacion1];
+    clusters=nuevoCluster;
+    nuevoCluster=ClusterPromedio(datosArray,k);
+end
 
