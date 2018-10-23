@@ -1,0 +1,8 @@
+function[newCluster] = crearCentroide2(entrada)
+    dimensiones=size(entrada);%tomamos las medidas de los datos concatenados con su cluster asignado
+    promedios=[1,dimensiones(2)-1];%
+    for c=1:dimensiones(2)-1
+        promedios(1,c)=sum(entrada(:,c))/dimensiones(1);
+    end
+    newCluster=promedios;
+end

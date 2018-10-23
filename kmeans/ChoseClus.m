@@ -1,15 +1,13 @@
 function [clus]=ChoseClus(asignacion)
-    dimensiones=size(asignacion);
-    clus=[dimensiones(1),1];
-    for c=1:dimensiones(1)
-        vector=asignacion(c,1:dimensiones(2));
-        aux=min(vector);
+    dimensiones=size(asignacion);%tamaño de los registros pero tomadas de la matriz que contiene las distancias
+    clus=[dimensiones(1),1];%inicializamos matriz donde se asignara la distancia mas corta
+    for c=1:dimensiones(1)%este for basicamente va recorriendo toda la matriz de distancias filtrando al mas pequeño
+        vector=asignacion(c,1:dimensiones(2));%tomamos el renglon de distancia
+        aux=min(vector);%encontramos el minimo
         maping=asignacion(c,:)==aux;
-        indice=find(maping==1);
-        clus(c,1)=indice;
+        indice=find(maping==1);%junto con la variable de maping enocntramos el indice de la distancia y con esto determinamos que centroide es
+        clus(c,1)=indice;%lo agregamos a la columna de resultado
     end
     clus(:,2)=[];
-%     vector=asignacion(c,1:dimensiones(2));
-%         vector
-%         aux=min(vector);
+
 end
