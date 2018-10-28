@@ -1,10 +1,5 @@
 function [clusters]=CrearCentroides(data,k)
     dimensiones = size(data); %tomamos las dimensiones de la tabla
-    %data(:,dimensiones(2))=[]; %quitamos las clases y dejamos solamente los datos
-    
-    %data = table2array(data);%convertimos la tabla de datos que entra en una matriz
-    
-    %dataArray = table2array(data);%convertimos la tabla de datos que entra en una matriz
     minimo=min(data);%esto nos devuelve un vector con los valores minimos de cada columna
     maximo=max(data);%valores maximos de cada columna
     
